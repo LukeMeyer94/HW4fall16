@@ -1,0 +1,14 @@
+
+%h2 Details about #{@user.user_id}
+
+%ul#details
+  %li
+    ID:
+    = @user.user_id
+  %li
+    Email:
+    = @user.email
+
+= link_to 'Edit', edit_user_path(@user)
+= button_to 'Delete', users_path(@user), :method => :delete, :confirm => 'Are you sure?'
+= link_to 'Back to user list', users_path
