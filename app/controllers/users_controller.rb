@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @user = User.find(id) # look up movie by unique ID
+    id = params[:id]
+    @user = User.find(id) 
   end
 
   def index
@@ -18,12 +18,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.create_user!(user_params)
     if @user.save
-      flash[:notice] = "Welcoms #{@user.user_id}, your account was successfully created."
+      @user.session_token = SecureRandom.base64
+      flash[:notice] = "Welcome #{@user.user_id}, your account was successfully created."
       redirect_to movies_path
     else
-      flash[:notice] = "#{@user.user_id} is taken. Please try again"
+      flash[:warning] = "#{@user.user_id} is taken. Please try again"
       redirect_to new_user_path
     end
   end
