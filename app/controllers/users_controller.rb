@@ -20,9 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.create_user!(user_params)
     if @user.save
-      @user.session_token = SecureRandom.base64
-      flash[:notice] = "Welcome #{@user.user_id}, your account was successfully created."
-      redirect_to movies_path
+      flash[:notice] = "Welcome #{@user.user_id}, your account was successfully created. Please login now"
+      redirect_to login_path
     else
       flash[:warning] = "#{@user.user_id} is taken. Please try again"
       redirect_to new_user_path
