@@ -9,10 +9,6 @@ class UsersController < ApplicationController
     @user = User.find(id) 
   end
 
-  def index
-    @users = User.all
-  end
-
   def new
     # default: render 'new' template
   end
@@ -26,12 +22,6 @@ class UsersController < ApplicationController
       flash[:warning] = "#{@user.user_id} is taken. Please try again"
       redirect_to new_user_path
     end
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def destroy
